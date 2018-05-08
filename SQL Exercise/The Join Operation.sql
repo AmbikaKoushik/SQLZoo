@@ -72,13 +72,13 @@ SELECT stadium, COUNT(*) FROM
 SELECT matchid, mdate, COUNT(*) FROM
 	game JOIN goal ON (id = matchid)
 	WHERE team1 = 'POL' OR team2 = 'POL'
-	GROUP BY matchid
+	GROUP BY matchid,mdate
 
 //12. For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'
 SELECT matchid, mdate, COUNT(*) FROM
 	game JOIN goal ON (id = matchid)
 	WHERE teamid = 'GER'
-	GROUP BY matchid
+	GROUP BY matchid, mdate;
 
 //13. 
 //List every match with the goals scored by each team as shown. This will use "CASE WHEN" which has not been explained in any previous exercises.
@@ -94,7 +94,7 @@ SELECT mdate,
 	   team2, 
 	   SUM(CASE WHEN teamid = team2 THEN 1 ELSE 0 END) AS score2 FROM
 	game LEFT JOIN goal ON (id = matchid)
-	GROUP BY id
+	GROUP BY id,mdate,team1, team2
 	ORDER BY mdate, matchid, team1, team2
 
 	
